@@ -39,7 +39,7 @@ public class est2 extends JFrame {
     private void conectarAoServidor() {
         new Thread(() -> {
             try {
-                Socket socket = new Socket("127.0.0.1", 12345);
+                Socket socket = new Socket("192.168.245.132", 12345);
                 saida = new PrintWriter(socket.getOutputStream(), true);
                 entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
