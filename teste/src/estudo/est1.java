@@ -2,8 +2,13 @@ package estudo;
 
 import java.io.*;
 import java.net.*;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class est1 {
+
+    private static List<PrintWriter> clientes = new CopyOnWriteArrayList<>();
+
     public static void main(String[] args) {
         int porta = 12345;
 
