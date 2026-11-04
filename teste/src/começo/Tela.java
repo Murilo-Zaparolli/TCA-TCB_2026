@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.Point;
 
 public class Tela extends JFrame {
@@ -31,6 +33,7 @@ public class Tela extends JFrame {
         objeto.setBounds(x, y, bloco.getIconWidth(), bloco.getIconHeight());
 
         objeto.addMouseListener(evento_mover);
+        this.addKeyListener(evento_reset);
 
         this.add(objeto);
         this.setSize(largura, altura);
@@ -43,6 +46,8 @@ public class Tela extends JFrame {
     private MouseListener evento_mover = new MouseListener() {
         @Override 
         public void mouseClicked(MouseEvent e) {
+            objeto.setVisible(false);
+            repaint();
         }
         @Override
         public void mousePressed(MouseEvent e) {
@@ -62,6 +67,22 @@ public class Tela extends JFrame {
         }
     };
 
+    private KeyListener evento_reset = new KeyListener() {
+        @Override 
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_K) {
+                objeto.setVisible(true);
+                repaint();
+            }
+        }
+        @Override 
+        public void keyReleased(KeyEvent e){
+        }
+        @Override 
+        public void keyTyped(KeyEvent e){
+        }
+    };
+
     public class Mover extends Thread {
 
         @Override
@@ -69,18 +90,20 @@ public class Tela extends JFrame {
 
             while (true) {
                 try {sleep(10);} catch (Exception e) {}
-                if (mousePressionado) {
+                if (mousePressionado && objeto.isVisible()) {
                     Point ponto = getMousePosition();
-                    objeto.setBounds(
-                        ponto.x - (bloco.getIconWidth() / 2), 
-                        ponto.y - (bloco.getIconHeight() / 2), 
-                        bloco.getIconWidth(), 
-                        bloco.getIconHeight());
+
+                    if (ponto != null) {
+                        objeto.setBounds(
+                            ponto.x - (bloco.getIconWidth() / 2), 
+                            ponto.y - (bloco.getIconHeight() / 2), 
+                            bloco.getIconWidth(), 
+                            bloco.getIconHeight()
+                        );
+                    }
                 }
             }
-
         }
-    
     }
 }
 
