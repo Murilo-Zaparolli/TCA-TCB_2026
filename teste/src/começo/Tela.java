@@ -1,13 +1,8 @@
 package começo;
 
 import javax.swing.*;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.Point;
+import java.awt.*;
+import java.awt.event.*;
 
 public class Tela extends JFrame {
 
@@ -73,6 +68,14 @@ public class Tela extends JFrame {
             if (e.getKeyCode() == KeyEvent.VK_K) {
                 objeto.setVisible(true);
                 repaint();
+            }
+
+            if (e.getKeyCode() == KeyEvent.VK_T) {
+                remove(objeto);
+            }
+
+            if (e.getKeyCode() == KeyEvent.VK_R) {
+                add(objeto);
             }
         }
         @Override 
