@@ -6,12 +6,13 @@ import java.awt.event.*;
 
 public class Tela extends JFrame {
 
-    ImageIcon bloco = new ImageIcon(getClass().getResource("/imagens/images.jpeg"));
-    ImageIcon bloco2 = new ImageIcon(getClass().getResource("/imagens/blocks.jpeg"));
+    ImageIcon bloco = new ImageIcon(getClass().getResource("/imagens/Card.png"));
+    Dimension dBloco = new Dimension(bloco.getIconHeight(), bloco.getIconWidth());
 
     JLabel objeto = new JLabel(bloco);
 
     boolean mousePressionado = false;
+    boolean mouseEmCima = false;
 
     Dimension tamanhoTela = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -56,9 +57,11 @@ public class Tela extends JFrame {
         }
         @Override
         public void mouseEntered(MouseEvent e) {
+            objeto.setSize(dBloco);
         }
         @Override
         public void mouseExited(MouseEvent e) {
+            objeto.setSize((int)(dBloco.height*0.9), (int)(dBloco.width*0.9));
         }
     };
 
@@ -108,7 +111,26 @@ public class Tela extends JFrame {
             }
         }
     }
+    public class MouseEmCima extends Thread {
+
+        @Override 
+        public void run() {
+
+            while (true) {
+
+                try{sleep(10);}catch(Exception e){}
+
+                if (mouseEmCima && objeto.isVisible()) {
+                    
+                }
+                
+            }
+
+        }
+    }
 }
+
+
 
 
 
