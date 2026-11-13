@@ -8,6 +8,7 @@ public class Tela extends JFrame {
 
     ImageIcon bloco = new ImageIcon(getClass().getResource("/imagens/Card.png"));
     Dimension dBloco = new Dimension(bloco.getIconHeight(), bloco.getIconWidth());
+    ImageIcon blocoCMouseEmCima = redimensionar(bloco, dBloco);
 
     JLabel objeto = new JLabel(bloco);
 
@@ -19,8 +20,8 @@ public class Tela extends JFrame {
     int largura = (int) tamanhoTela.getWidth();
     int altura = (int) tamanhoTela.getHeight();
     
-    int x = (int)(Math.random()*(largura - 250));
-    int y = (int)(Math.random()*(altura - 150));
+    int x = 0;
+    int y = 0;
 
     public void tela() {
 
@@ -39,6 +40,14 @@ public class Tela extends JFrame {
         this.setVisible(true);
     }
 
+    static ImageIcon redimensionar(ImageIcon bloco, Dimension dBloco) {
+
+        System.out.println(dBloco.width + " " + dBloco.height);
+        Image img = bloco.getImage().getScaledInstance(279, 482, DO_NOTHING_ON_CLOSE);
+        return new ImageIcon(img);
+
+    }
+
     private MouseListener evento_mover = new MouseListener() {
         @Override 
         public void mouseClicked(MouseEvent e) {
@@ -49,6 +58,7 @@ public class Tela extends JFrame {
         public void mousePressed(MouseEvent e) {
             // objeto.setIcon(bloco2);
             mousePressionado = true;
+            objeto.setIcon(bloco);
         }
         @Override
         public void mouseReleased(MouseEvent e) {
@@ -57,11 +67,13 @@ public class Tela extends JFrame {
         }
         @Override
         public void mouseEntered(MouseEvent e) {
-            objeto.setSize(dBloco);
+            objeto.setIcon(blocoCMouseEmCima);
+            objeto.setSize(279, 482);
         }
         @Override
         public void mouseExited(MouseEvent e) {
-            objeto.setSize((int)(dBloco.height*0.9), (int)(dBloco.width*0.9));
+            objeto.setIcon(bloco);
+            objeto.setSize(268, 463);
         }
     };
 
